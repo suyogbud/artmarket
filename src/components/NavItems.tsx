@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 const NavItems = () => {
-  return <div>NavItems</div>;
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
+
+  return <div className="flex gap-4 h-full">NavItems</div>;
 };
 
 export default NavItems;
