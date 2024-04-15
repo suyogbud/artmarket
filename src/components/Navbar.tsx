@@ -2,6 +2,7 @@ import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { Icons } from "./Icons";
+import NavItems from "./NavItems";
 
 const Navbar = () => {
   return (
@@ -12,8 +13,11 @@ const Navbar = () => {
             <div className="flex h-16 items-center">
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
-                  <Icons.logo className="h-8 w-auto" />
+                  <Icons.logo className="h-20 w-20" />
                 </Link>
+              </div>
+              <div className="hidden z-50 lg:ml-8 lg:block lg:self-stretch">
+                <NavItems />
               </div>
             </div>
           </div>
