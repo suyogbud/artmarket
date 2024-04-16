@@ -6,17 +6,17 @@ export const PRODUCT_CATEGORIES = [
       {
         name: "New Arrivals",
         href: "#",
-        imageSrc: "nav/art/art1.jpg",
+        imageSrc: "/nav/art/art1.png",
       },
       {
         name: "Editor Picks",
         href: "#",
-        imageSrc: "nav/art/art2.jpg",
+        imageSrc: "/nav/art/art2.png",
       },
       {
         name: "Best Seller",
         href: "#",
-        imageSrc: "nav/art/art2.jpg",
+        imageSrc: "/nav/art/art3.png",
       },
     ],
   },
@@ -27,17 +27,17 @@ export const PRODUCT_CATEGORIES = [
       {
         name: "Favorites",
         href: "#",
-        imageSrc: "nav/realistic/1.jpg",
+        imageSrc: "/nav/realistic/1.png",
       },
       {
         name: "Editor Picks",
         href: "#",
-        imageSrc: "nav/realistic/2.jpg",
+        imageSrc: "/nav/realistic/2.png",
       },
       {
         name: "Best Seller",
         href: "#",
-        imageSrc: "nav/realistic/2.jpg",
+        imageSrc: "/nav/realistic/3.png",
       },
     ],
   },
