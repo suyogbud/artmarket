@@ -20,6 +20,7 @@ const NavItems = () => {
       document.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
   const navRef = useRef<HTMLDivElement | null>(null);
 
   useOnClickOutside(navRef, () => {
