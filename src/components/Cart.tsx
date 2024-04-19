@@ -3,6 +3,7 @@ import React from "react";
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -10,9 +11,12 @@ import {
 import { Divide, ShoppingCart } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { formatPrice } from "@/lib/utils";
+import Link from "next/link";
+import { buttonVariants } from "./ui/button";
 
 const Cart = () => {
   const itemCount = 1;
+  const fee = 100;
   return (
     <Sheet>
       <SheetTrigger className="group -m-2 flex items-center p-2">
@@ -40,9 +44,25 @@ const Cart = () => {
                 </div>
                 <div className="flex">
                   <span className="flex-1">Transaction Fee</span>
-                  <span>{formatPrice(100)}</span>
+                  <span>{formatPrice(fee)}</span>
+                </div>
+                <div className="flex">
+                  <span className="flex-1">Total</span>
+                  <span>{formatPrice(fee)}</span>
                 </div>
               </div>
+              <SheetFooter>
+                <SheetTrigger asChild>
+                  <Link
+                    href="/cart"
+                    className={buttonVariants({
+                      className: "w-full",
+                    })}
+                  >
+                    CheckOut
+                  </Link>
+                </SheetTrigger>
+              </SheetFooter>
             </div>
           </>
         ) : (
