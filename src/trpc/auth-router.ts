@@ -50,8 +50,9 @@ export const authRouter = router({
     }),
     signIn: publicProcedure
     .input(schemaValidator)
-    .mutation(async({input})=>{
+    .mutation(async({input, ctx})=>{
       const{email, password} = input
+      const {res} = ctx
       const payload = await getPayloadClient()
       try{
         await payload.login({
@@ -59,7 +60,8 @@ export const authRouter = router({
           data:{
             email,
             password,
-          }
+          },
+          res,
         })
         return {success: true}
       }catch(err){
