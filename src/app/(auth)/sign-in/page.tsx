@@ -15,9 +15,13 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { ZodError } from "zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Page = () => {
+    const searchParams = useSearchParams()
+    const isSeller = searchParams.get('as') === 'seller'
+    const origin = searchParams.get("origin")
+    const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -26,7 +30,6 @@ const Page = () => {
     resolver: zodResolver(schemaValidator),
   });
 
-const router = useRouter()
 
   const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
     onError:(err)=>{
@@ -57,15 +60,15 @@ const router = useRouter()
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20" />
-            <h1 className="text-2xl font-bold">Create an account</h1>
+            <h1 className="text-2xl font-bold">Sign in to your account</h1>
             <Link
-              href="sign-in"
+              href="sign-up"
               className={buttonVariants({
                 variant: "link",
                 className: "gap-1.5",
               })}
             >
-              Already have an account? Sign in
+              Don't have an account? Sign up 
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </div>
@@ -96,9 +99,20 @@ const router = useRouter()
                   {errors?.password&& <p className="text-sm text-red-500">{errors.password.message}</p>}
                 </div>
 
-                <Button>Sign Up</Button>
+                <Button>Sign In</Button>
               </div>
             </form>
+            <div className="relative">
+                <div className="absolute inset-o flex items-center">
+                    <span className="w-full border-t"/>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        or
+                    </span>
+                </div>
+
+            </div>
           </div>
         </div>
       </div>
