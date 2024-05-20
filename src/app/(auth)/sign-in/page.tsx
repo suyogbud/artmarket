@@ -22,6 +22,13 @@ const Page = () => {
     const isSeller = searchParams.get('as') === 'seller'
     const origin = searchParams.get("origin")
     const router = useRouter()
+
+    const continueAsSeller = () =>{
+      router.push("?as=seller")
+    }
+    const continueAsBuyer = () =>{
+      router.replace('/sign-in', undefined)
+    }
   const {
     register,
     handleSubmit,
@@ -31,24 +38,31 @@ const Page = () => {
   });
 
 
-  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
-    onError:(err)=>{
-      if(err.data?.code === "CONFLICT"){
-        toast.error(
-          'This email already exists.'
-        )
-        return
-      }
-      if(err instanceof ZodError){
-        toast.error(err.issues[0].message)
-        return
-      }
-      toast.error('Something Occured!!!')
-    },
-    onSuccess:({sentToEmail})=>{
-      toast.success(`Email sent to ${sentToEmail}.`)
-      router.push("/verify-email?to=" + sentToEmail)
-    }
+  const { mutate, isLoading } = 
+  trpc.auth.signIn.useMutation({
+    onSuccess: async () => {
+        toast.success('Signed in successfully')
+
+        if (origin) {
+          router.push(`/${origin}`)
+          router.refresh()
+          return
+        }
+
+        if (isSeller) {
+          router.push('/sell')
+          router.refresh()
+          return
+        }
+
+        router.push('/')
+        router.refresh()
+      },
+      onError: (err) => {
+        if (err.data?.code === 'UNAUTHORIZED') {
+          toast.error('Invalid email or password.')
+        }
+      },
   });
 
   const onsubmit = ({ email, password }: TschemaValidator) => {
@@ -60,7 +74,7 @@ const Page = () => {
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20" />
-            <h1 className="text-2xl font-bold">Sign in to your account</h1>
+            <h1 className="text-2xl font-bold">Sign in to your {isSeller?"Seller Account":"Account"}</h1>
             <Link
               href="sign-up"
               className={buttonVariants({
@@ -111,8 +125,10 @@ const Page = () => {
                         or
                     </span>
                 </div>
-
             </div>
+            {isSeller?(
+              <Button onClick={continueAsBuyer} variant='secondary' disabled={isLoading}>Continue as customer</Button>
+            ):<Button onClick={continueAsSeller} variant='secondary' disabled={isLoading}>Continue as Seller</Button>}
           </div>
         </div>
       </div>
