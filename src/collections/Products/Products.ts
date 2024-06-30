@@ -2,7 +2,7 @@ import { PRODUCT_CATEGORIES } from "../../app/config";
 import { CollectionConfig } from "payload/types";
 
 export const Products: CollectionConfig = {
-  slug: "Products",
+  slug: "products",
   admin: {
     useAsTitle: "name",
   },
