@@ -31,8 +31,8 @@ export const Products: CollectionConfig = {
     },
     {
       name: "price",
-      label: "Price in USD",
-      max: 1000,
+      label: "Price in NPR",
+      max: 10000,
       type: "number",
       required: true,
     },
