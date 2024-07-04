@@ -1,6 +1,6 @@
 # ArtMarket
 
-ArtMarket is an online marketplace for buying and selling artworks. This application is built using Next.js, TypeScript, tRPC, and MongoDB, with Payload CMS for content management, Stripe for payment processing, and Tailwind CSS for styling.
+ArtMarket is an online marketplace for buying and selling artworks. This application is built using Next.js, TypeScript, tRPC, and MongoDB, with Payload CMS for content management, Stripe for payment processing, and Tailwind CSS for styling. JSON Web Token for Authentication.
 
 ## Table of Contents
 
