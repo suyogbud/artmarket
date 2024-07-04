@@ -6,7 +6,6 @@ ArtMarket is an online marketplace for buying and selling artworks. This applica
 
 - [Features](#features)
 - [Installation](#installation)
-- [Configuration](#configuration)
 - [Running the Application](#running-the-application)
 
 
