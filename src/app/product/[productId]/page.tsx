@@ -42,8 +42,9 @@ const Page = async ({ params }: PageProps) => {
   const label = PRODUCT_CATEGORIES.find(
     ({ value }) => value === product.category
   )?.label;
-
+  // @ts-expect-error
   const validUrls = product.images
+    // @ts-expect-error
     .map(({ image }) => (typeof image === "string" ? image : image.url))
     .filter(Boolean) as string[];
 
@@ -78,12 +79,12 @@ const Page = async ({ params }: PageProps) => {
             </ol>
             <div className="mt-4">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                {product.name}
+                {product.name as string}
               </h1>
               <section className="mt-4">
                 <div className="flex items-center">
                   <p className="font-medium text-gray-900">
-                    {formatPrice(product.price)}
+                    {formatPrice(product.price as number)}
                   </p>
 
                   <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
@@ -93,7 +94,7 @@ const Page = async ({ params }: PageProps) => {
 
                 <div className="mt-4 space-y-6">
                   <p className="text-base text-muted-foreground">
-                    {product.description}
+                    {product.description as string}
                   </p>
                 </div>
 
@@ -118,7 +119,7 @@ const Page = async ({ params }: PageProps) => {
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <div>
               <div className="mt-10">
-                <AddToCartButton product={product} />
+                <AddToCartButton product={product as any} />
               </div>
               <div className="mt-6 text-center">
                 <div className="group inline-flex text-sm text-medium">
@@ -137,7 +138,11 @@ const Page = async ({ params }: PageProps) => {
       </div>
       <ProductReel
         href="/products"
-        query={{ category: product.category, limit: 4 }}
+        query={{
+          // @ts-expect-error
+          category: product.category,
+          limit: 4,
+        }}
         title={`Similar ${label}`}
         subtitle={`Browse similar high-quality ${label} just like '${product.name}'`}
       />
